@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Remote control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <style>
+        :root {
+            touch-action: manipulation;
+            --btn-width: 100px;
+            --gap: 40px;
+        }
+
+        .btns {
+            margin: var(--btn-width) auto;
+            width: calc(2 * var(--btn-width) + var(--gap));
+            display: grid;
+            gap: var(--gap);
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .btn {
+            font-size: calc(var(--btn-width) / 2);
+            width: var(--btn-width);
+            height: var(--btn-width);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btns">
+        <button class="btn btn-play">▶</button>
+        <button class="btn btn-pause">⏸</button>
+        <button class="btn btn-volume-up">🔊</button>
+        <button class="btn btn-volume-down">🔉</button>
+    </div>
+</body>
+<script>
+    const token = '{{csrf}}'; // is added by the server when serving the file
+
+    function addEventListeners() {
+        onClick(getElement('btn-volume-up'), sendVolumeUp);
+        onClick(getElement('btn-volume-down'), sendVolumeDown);
+        onClick(getElement('btn-play'), sendPlay);
+        onClick(getElement('btn-pause'), sendPause);
+    }
+
+    function sendVolumeUp() {
+        sendCommand('volume-up');
+    }
+
+    function sendVolumeDown() {
+        sendCommand('volume-down');
+    }
+
+    function sendPlay() {
+        sendCommand('play');
+    }
+
+    function sendPause() {
+        sendCommand('pause');
+    }
+
+    function sendCommand(command) {
+        fetch(`/command/${command}`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: { 'csrf-token': token }
+        })
+            .then(res => console.log(res))
+            .catch(e => console.log(e));
+
+    }
+
+    function getElement(cssClass) {
+        return document.getElementsByClassName(cssClass)[0];
+    }
+
+    function onClick(element, fn) {
+        element.addEventListener('click', fn);
+    }
+
+    window.onload = addEventListeners();
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "htpc-remote-control",
+  "version": "1.0.0",
+  "description": "Node project to remotely control a home theater PC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maar-ten/htpc-remote-control.git"
+  },
+  "keywords": [
+    "node",
+    "htpc",
+    "remote",
+    "control"
+  ],
+  "author": "Maar-ten",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/maar-ten/htpc-remote-control/issues"
+  },
+  "homepage": "https://github.com/maar-ten/htpc-remote-control#readme",
+  "dependencies": {
+    "server": "1.0.33"
+  }
+}
