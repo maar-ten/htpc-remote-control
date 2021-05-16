@@ -3,6 +3,11 @@ const { spawnSync } = require('child_process');
 const { get, put } = server.router;
 const { render } = server.reply;
 
+const KEY_VOLUME_DOWN = 174;
+const KEY_VOLUME_UP = 175;
+const KEY_STOP = 178;
+const KEY_PLAY_PAUSE = 179;
+
 server([
     // return index.html for requests to the root of the server
     get('/', ctx => render('index.html')),
@@ -15,18 +20,19 @@ server([
 ]);
 
 function handleCommand(command) {
+    console.log(command);
     switch (command) {
         case 'volume-up':
-            sendKey(175);
+            sendKey(KEY_VOLUME_UP);
             break;
         case 'volume-down':
-            sendKey(174);
+            sendKey(KEY_VOLUME_DOWN);
             break;
-        case 'play':
-            sendKey(179);
+        case 'play-pause':
+            sendKey(KEY_PLAY_PAUSE);
             break;
-        case 'pause':
-            sendKey(179);
+        case 'stop':
+            sendKey(KEY_STOP);
             break;
     }
 }
