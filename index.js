@@ -31,9 +31,6 @@ function handleCommand(command) {
         case 'play-pause':
             sendKey(KEY_PLAY_PAUSE);
             break;
-        case 'stop':
-            sendKey(KEY_STOP);
-            break;
     }
 }
 

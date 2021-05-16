@@ -23,9 +23,11 @@
             margin: var(--btn-width) auto;
             width: calc(2 * var(--btn-width) + var(--gap));
             display: grid;
-            gap: var(--gap);
-            grid-template-rows: 1fr 1fr;
-            grid-template-columns: 1fr 1fr;
+            row-gap: calc(var(--gap) / 2);
+            column-gap: var(--gap);
+            grid-template-areas:
+                "a a"
+                "b c";
         }
 
         .btn {
@@ -39,25 +41,32 @@
             width: var(--btn-width);
             height: var(--btn-width);
         }
+
+        .btn-play-pause {
+            grid-area: a;
+            margin: auto;
+        }
     </style>
 </head>
 
 <body>
     <div class="btns">
         <button class="btn btn-play-pause">⏯</button>
-        <button class="btn btn-stop">⏹</button>
-        <button class="btn btn-volume-up">🔊</button>
         <button class="btn btn-volume-down">🔉</button>
+        <button class="btn btn-volume-up">🔊</button>
     </div>
 </body>
 <script>
     const token = '{{csrf}}'; // is added by the server when serving the file
 
     function addEventListeners() {
+        onClick(getElement('btn-play-pause'), sendPlayPause);
         onClick(getElement('btn-volume-up'), sendVolumeUp);
         onClick(getElement('btn-volume-down'), sendVolumeDown);
-        onClick(getElement('btn-play-pause'), sendPlayPause);
-        onClick(getElement('btn-stop'), sendStop);
+    }
+
+    function sendPlayPause() {
+        sendCommand('play-pause');
     }
 
     function sendVolumeUp() {
@@ -66,14 +75,6 @@
 
     function sendVolumeDown() {
         sendCommand('volume-down');
-    }
-
-    function sendPlayPause() {
-        sendCommand('play-pause');
-    }
-
-    function sendStop() {
-        sendCommand('stop');
     }
 
     function sendCommand(command) {
