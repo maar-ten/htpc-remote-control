@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <title>Remote control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <style>
+        html {
+            background: rgb(0, 0, 0);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(134, 134, 134, 1) 100%);
+            background-repeat: no-repeat;
+        }
+
         :root {
             touch-action: manipulation;
             --btn-width: 100px;
@@ -23,6 +29,12 @@
         }
 
         .btn {
+            --shadow: calc(var(--btn-width) / 4);
+            all: unset;
+            border-radius: 50%;
+            background: #aaa;
+            box-shadow: #fff var(--shadow) var(--shadow) var(--shadow) inset;
+            text-align: center;
             font-size: calc(var(--btn-width) / 2);
             width: var(--btn-width);
             height: var(--btn-width);
@@ -32,8 +44,8 @@
 
 <body>
     <div class="btns">
-        <button class="btn btn-play">▶</button>
-        <button class="btn btn-pause">⏸</button>
+        <button class="btn btn-play-pause">⏯</button>
+        <button class="btn btn-stop">⏹</button>
         <button class="btn btn-volume-up">🔊</button>
         <button class="btn btn-volume-down">🔉</button>
     </div>
@@ -44,8 +56,8 @@
     function addEventListeners() {
         onClick(getElement('btn-volume-up'), sendVolumeUp);
         onClick(getElement('btn-volume-down'), sendVolumeDown);
-        onClick(getElement('btn-play'), sendPlay);
-        onClick(getElement('btn-pause'), sendPause);
+        onClick(getElement('btn-play-pause'), sendPlayPause);
+        onClick(getElement('btn-stop'), sendStop);
     }
 
     function sendVolumeUp() {
@@ -56,12 +68,12 @@
         sendCommand('volume-down');
     }
 
-    function sendPlay() {
-        sendCommand('play');
+    function sendPlayPause() {
+        sendCommand('play-pause');
     }
 
-    function sendPause() {
-        sendCommand('pause');
+    function sendStop() {
+        sendCommand('stop');
     }
 
     function sendCommand(command) {
