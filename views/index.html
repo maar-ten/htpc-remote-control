@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
-        html {
-            background: rgb(0, 0, 0);
-            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(134, 134, 134, 1) 100%);
-            background-repeat: no-repeat;
-        }
-
         :root {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
             touch-action: manipulation;
             --btn-width: 100px;
-            --gap: 40px;
+            --gap: calc(var(--btn-width) * .4);
+
+            height: 100%;
+            background: #eeeeee;
+            background: linear-gradient(0deg, #dddddd 0%,#eeeeee 100%);
+            background-repeat: no-repeat;
         }
 
         .btns {
@@ -34,26 +36,43 @@
             --shadow: calc(var(--btn-width) / 4);
             all: unset;
             border-radius: 50%;
-            background: #aaa;
-            box-shadow: #fff var(--shadow) var(--shadow) var(--shadow) inset;
+            border: 1px solid #7f7f7f;
+            background: #dddddd;
+            box-shadow: #ffffff var(--shadow) var(--shadow) var(--shadow) inset;
             text-align: center;
             font-size: calc(var(--btn-width) / 2);
             width: var(--btn-width);
             height: var(--btn-width);
         }
 
+        .btn:hover {
+            background: #eeeeee;
+        }
+
+        .btn:active {
+            box-shadow: none;
+        }
+
         .btn-play-pause {
             grid-area: a;
             margin: auto;
+        }
+
+        .btn img {
+            filter: invert(55%) sepia(2%) saturate(31%) hue-rotate(318deg) brightness(95%) contrast(82%);
+            position: relative;
+            width: calc(var(--btn-width) * .8);
+            top: calc(var(--btn-width) * .06);
+            left: calc(var(--btn-width) * .02);
         }
     </style>
 </head>
 
 <body>
     <div class="btns">
-        <button class="btn btn-play-pause">⏯</button>
-        <button class="btn btn-volume-down">🔉</button>
-        <button class="btn btn-volume-up">🔊</button>
+        <button class="btn btn-play-pause"><img alt="play-pause" src="assets/play_pause.svg"></button>
+        <button class="btn btn-volume-down"><img alt="volume-down" src="assets/volume_down.svg"></button>
+        <button class="btn btn-volume-up"><img alt="volume-up" src="assets/volume_up.svg"></button>
     </div>
 </body>
 <script>

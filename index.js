@@ -1,7 +1,7 @@
 const server = require('server');
 const { spawnSync } = require('child_process');
 const { get, put } = server.router;
-const { render } = server.reply;
+const { render, file } = server.reply;
 
 const KEY_VOLUME_DOWN = 174;
 const KEY_VOLUME_UP = 175;
