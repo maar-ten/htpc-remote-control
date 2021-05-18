@@ -5,7 +5,6 @@ const { render } = server.reply;
 
 const KEY_VOLUME_DOWN = 174;
 const KEY_VOLUME_UP = 175;
-const KEY_STOP = 178;
 const KEY_PLAY_PAUSE = 179;
 
 server([
