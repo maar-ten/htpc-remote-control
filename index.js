@@ -1,13 +1,15 @@
 const server = require('server');
 const { spawnSync } = require('child_process');
 const { get, put } = server.router;
-const { render, file } = server.reply;
+const { render } = server.reply;
+
+const PORT = process.env.PORT || 3000;
 
 const KEY_VOLUME_DOWN = 174;
 const KEY_VOLUME_UP = 175;
 const KEY_PLAY_PAUSE = 179;
 
-server([
+server({port: PORT}, [
     // return index.html for requests to the root of the server
     get('/', ctx => render('index.html')),
 
@@ -18,8 +20,10 @@ server([
     get(ctx => status(404))
 ]);
 
+console.info(`Server running on http://localhost:${PORT}`);
+
 function handleCommand(command) {
-    console.log(command);
+    console.info(command);
     switch (command) {
         case 'volume-up':
             sendKey(KEY_VOLUME_UP);
